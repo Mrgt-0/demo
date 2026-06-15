@@ -1,7 +1,7 @@
-SELECT 
-    op.order_id,
-    SUM(op.quantity * ps.quantity_unit * mp.price) AS full_cost
-FROM order_line op
-JOIN product_specification ps ON op.product_id = ps.production_id
-JOIN material_price mp ON ps.material_id = mp.material_id
-GROUP BY op.order_id;
+select 
+	ol.customer_order_id as order_id,
+	sum(ol.quantity * s.quantity * mp.price) as full_cost
+	from order_line ol
+join specification s on ol.product_id = s.product_id
+join material_price mp on s.material_id = mp.material_id
+group by ol.customer_order_id;
